@@ -22,6 +22,7 @@ private:
    public slots:
        void fiveParams_click();
        void makePDF_click();
+       void receiveFiveParams(QString fiveRecive);
 };
 
 #endif // MAINWIDGET_H
