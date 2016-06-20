@@ -49,10 +49,18 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../finalQTDemo/main.cpp \
-		../finalQTDemo/mainwidget.cpp moc_mainwidget.cpp
+		../finalQTDemo/mainwidget.cpp \
+		../finalQTDemo/fiveparamswidget.cpp \
+		../finalQTDemo/pdfwidget.cpp moc_mainwidget.cpp \
+		moc_fiveparamswidget.cpp \
+		moc_pdfwidget.cpp
 OBJECTS       = main.o \
 		mainwidget.o \
-		moc_mainwidget.o
+		fiveparamswidget.o \
+		pdfwidget.o \
+		moc_mainwidget.o \
+		moc_fiveparamswidget.o \
+		moc_pdfwidget.o
 DIST          = ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/device_config.prf \
@@ -185,6 +193,7 @@ DIST          = ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_post.prf \
+		../finalQTDemo/.qmake.stash \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -207,8 +216,12 @@ DIST          = ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/lex.prf \
-		../finalQTDemo/finalQTDemo.pro ../finalQTDemo/mainwidget.h ../finalQTDemo/main.cpp \
-		../finalQTDemo/mainwidget.cpp
+		../finalQTDemo/finalQTDemo.pro ../finalQTDemo/mainwidget.h \
+		../finalQTDemo/fiveparamswidget.h \
+		../finalQTDemo/pdfwidget.h ../finalQTDemo/main.cpp \
+		../finalQTDemo/mainwidget.cpp \
+		../finalQTDemo/fiveparamswidget.cpp \
+		../finalQTDemo/pdfwidget.cpp
 QMAKE_TARGET  = finalQTDemo
 DESTDIR       = 
 TARGET        = finalQTDemo.app/Contents/MacOS/finalQTDemo
@@ -353,6 +366,7 @@ Makefile: ../finalQTDemo/finalQTDemo.pro ../../../Qt5.7.0/5.7/clang_64/mkspecs/m
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt5.7.0/5.7/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -512,6 +526,7 @@ Makefile: ../finalQTDemo/finalQTDemo.pro ../../../Qt5.7.0/5.7/clang_64/mkspecs/m
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/default_pre.prf:
 ../../../Qt5.7.0/5.7/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -567,8 +582,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../finalQTDemo/mainwidget.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../finalQTDemo/main.cpp ../finalQTDemo/mainwidget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../finalQTDemo/mainwidget.h ../finalQTDemo/fiveparamswidget.h ../finalQTDemo/pdfwidget.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../finalQTDemo/main.cpp ../finalQTDemo/mainwidget.cpp ../finalQTDemo/fiveparamswidget.cpp ../finalQTDemo/pdfwidget.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -594,14 +609,30 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwidget.cpp
+compiler_moc_header_make_all: moc_mainwidget.cpp moc_fiveparamswidget.cpp moc_pdfwidget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwidget.cpp
+	-$(DEL_FILE) moc_mainwidget.cpp moc_fiveparamswidget.cpp moc_pdfwidget.cpp
 moc_mainwidget.cpp: ../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../finalQTDemo/pdfwidget.h \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../finalQTDemo/fiveparamswidget.h \
 		../finalQTDemo/mainwidget.h \
 		../../../Qt5.7.0/5.7/clang_64/bin/moc
 	/Users/wxt/Qt5.7.0/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/wxt/Qt5.7.0/5.7/clang_64/mkspecs/macx-clang -I/Users/wxt/Desktop/finalQTDemo/finalQTDemo -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/7.3.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include -I'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks (framework directory)' -F/Users/wxt/Qt5.7.0/5.7/clang_64/lib ../finalQTDemo/mainwidget.h -o moc_mainwidget.cpp
+
+moc_fiveparamswidget.cpp: ../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../finalQTDemo/fiveparamswidget.h \
+		../../../Qt5.7.0/5.7/clang_64/bin/moc
+	/Users/wxt/Qt5.7.0/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/wxt/Qt5.7.0/5.7/clang_64/mkspecs/macx-clang -I/Users/wxt/Desktop/finalQTDemo/finalQTDemo -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/7.3.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include -I'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks (framework directory)' -F/Users/wxt/Qt5.7.0/5.7/clang_64/lib ../finalQTDemo/fiveparamswidget.h -o moc_fiveparamswidget.cpp
+
+moc_pdfwidget.cpp: ../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../finalQTDemo/pdfwidget.h \
+		../../../Qt5.7.0/5.7/clang_64/bin/moc
+	/Users/wxt/Qt5.7.0/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/wxt/Qt5.7.0/5.7/clang_64/mkspecs/macx-clang -I/Users/wxt/Desktop/finalQTDemo/finalQTDemo -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/wxt/Qt5.7.0/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/7.3.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include -I'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks (framework directory)' -F/Users/wxt/Qt5.7.0/5.7/clang_64/lib ../finalQTDemo/pdfwidget.h -o moc_pdfwidget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -622,17 +653,41 @@ compiler_clean: compiler_moc_header_clean
 main.o: ../finalQTDemo/main.cpp ../finalQTDemo/mainwidget.h \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../finalQTDemo/pdfwidget.h \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../finalQTDemo/fiveparamswidget.h \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../finalQTDemo/main.cpp
 
 mainwidget.o: ../finalQTDemo/mainwidget.cpp ../finalQTDemo/mainwidget.h \
 		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../finalQTDemo/pdfwidget.h \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../finalQTDemo/fiveparamswidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwidget.o ../finalQTDemo/mainwidget.cpp
+
+fiveparamswidget.o: ../finalQTDemo/fiveparamswidget.cpp ../finalQTDemo/fiveparamswidget.h \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fiveparamswidget.o ../finalQTDemo/fiveparamswidget.cpp
+
+pdfwidget.o: ../finalQTDemo/pdfwidget.cpp ../finalQTDemo/pdfwidget.h \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.7.0/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pdfwidget.o ../finalQTDemo/pdfwidget.cpp
 
 moc_mainwidget.o: moc_mainwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwidget.o moc_mainwidget.cpp
+
+moc_fiveparamswidget.o: moc_fiveparamswidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_fiveparamswidget.o moc_fiveparamswidget.cpp
+
+moc_pdfwidget.o: moc_pdfwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pdfwidget.o moc_pdfwidget.cpp
 
 ####### Install
 

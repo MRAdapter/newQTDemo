@@ -13,6 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwidget.cpp
+        mainwidget.cpp \
+    fiveparamswidget.cpp \
+    pdfwidget.cpp
 
-HEADERS  += mainwidget.h
+HEADERS  += mainwidget.h \
+    fiveparamswidget.h \
+    pdfwidget.h
