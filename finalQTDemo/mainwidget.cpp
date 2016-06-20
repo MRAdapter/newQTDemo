@@ -3,17 +3,17 @@
 mainWidget::mainWidget(QWidget *parent)
     : QWidget(parent)
 {
-    this->resize(480,270);
+    this->resize(1366,768);
     this->setWindowTitle("主界面");
-    fiveParams[0]= 50;
-    fiveParams[1]= 50;
-    fiveParams[2]= 0.12;
+    fiveParams[0]= 40.0;
+    fiveParams[1]= 40.0;
+    fiveParams[2]= 0.117;
     fiveParams[3]= 0.06;
     fiveParams[4]= 0.06;
     //fiveparamsBtn
     fiveParamsBtn = new QPushButton(this);
     fiveParamsBtn->setGeometry(QRect(50,25,300,25));
-    fiveParamsBtn->setText("默认参数(单位um):50,50,0.12,0.06,0.06");
+    fiveParamsBtn->setText("默认参数(单位mm):40.0,40.0,0.117,0.06,0.06");
     this->connect(fiveParamsBtn,SIGNAL(clicked()),this,SLOT(fiveParams_click()));
     //makeBtn
     makePDFBtn = new QPushButton(this);

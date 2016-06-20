@@ -13,23 +13,23 @@ fiveParamsWidget::fiveParamsWidget(QWidget *parent) : QWidget(parent)
     //    设置10个label
     label1 = new QLabel(this);
     label1->setGeometry(QRect(50,30,100,25));
-    label1->setText("背景宽:(单位um)");
+    label1->setText("背景宽:(单位mm)");
 
     label2 = new QLabel(this);
     label2->setGeometry(QRect(50,60,100,25));
-    label2->setText("背景高:(单位um)");
+    label2->setText("背景高:(单位mm)");
 
     label3 = new QLabel(this);
     label3->setGeometry(QRect(50,90,100,25));
-    label3->setText("点间距:(单位um)");
+    label3->setText("点间距:(单位mm)");
 
     label4 = new QLabel(this);
     label4->setGeometry(QRect(50,120,100,25));
-    label4->setText("小图宽:(单位um)");
+    label4->setText("小图宽:(单位mm)");
 
     label5 = new QLabel(this);
     label5->setGeometry(QRect(50,150,100,25));
-    label5->setText("小图高:(单位um)");
+    label5->setText("小图高:(单位mm)");
 
     bigWidth = new QTextEdit(this);
     bigWidth->setGeometry(QRect(200,30,100,25));
